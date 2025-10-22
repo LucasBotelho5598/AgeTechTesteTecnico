@@ -15,5 +15,6 @@
 ## Como Usar
 Conecte seu celular com USB ou com WiFI ou rode o Emulator!!!
 
-## Videos
-[VideoTeste.mp4](../../Desktop/VideoTeste.mp4)
+## Imagens
+![1age.jpg](../../Desktop/1age.jpg)
+![2age.jpg](../../Desktop/2age.jpg)
