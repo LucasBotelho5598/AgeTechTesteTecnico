@@ -42,6 +42,8 @@ import com.example.agetech.components.ErrorScreen
 import com.example.agetech.components.LoadingScreen
 import com.example.agetech.model.Login
 import com.example.agetech.model.Payments
+import com.example.agetech.viewmodel.PaymentsUiState
+import com.example.agetech.viewmodel.PaymentsViewModel
 
 
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
@@ -87,6 +89,7 @@ fun PaymentsUI(
     ) { innerPadding ->
         when (paymentsUiState) {
             is PaymentsUiState.Loading -> LoadingScreen(modifier = Modifier.fillMaxSize())
+            is PaymentsUiState.Error -> ErrorScreen()
             is PaymentsUiState.Success -> PaymentsBodyUI(
                 modifier = Modifier
                     .padding(innerPadding).fillMaxSize(),
@@ -94,7 +97,6 @@ fun PaymentsUI(
                 payments = paymentsUiState.payments
             )
 
-            is PaymentsUiState.Error -> ErrorScreen()
 
 
         }
@@ -113,46 +115,13 @@ fun PaymentsBodyUI(modifier: Modifier, login: Login, payments: List<Payments>) {
     ) {
         Column() {
             Spacer(Modifier.height(100.dp))
-            Text(
-                "Detalhes do pagamento",
-                Modifier.paddingFromBaseline(top = 50.dp),
-                fontSize = 28.sp,
-                color = Color.Black,
-                fontWeight = FontWeight.Bold,
-            )
-            Spacer(Modifier.height(50.dp))
-            Text(
-                "Nome: ${login.customerName}",
-                fontSize = 24.sp,
-                color = Color.Black,
-                fontWeight = FontWeight.Bold,
-            )
-            Spacer(Modifier.height(10.dp))
-            Row {
-                Text(
-                    "Agência: ${login.branchNumber} | Conta: ${login.accountNumber}",
-                    fontSize = 16.sp,
-                    color = Color(0xFF4A739C),
-                )
-            }
-            Spacer(Modifier.height(30.dp))
-            Text(
-                "Saldo: R$ 1500,00",
-                fontSize = 24.sp,
-                color = Color.Black,
-            )
-            Spacer(Modifier.height(30.dp))
-            Text(
-                "Contas pagas",
-                Modifier.paddingFromBaseline(top = 50.dp),
-                fontSize = 28.sp,
-                color = Color.Black,
-                fontWeight = FontWeight.Bold,
-            )
+
             LazyColumn() {
+                item{
+                    payHeader(login)
+                }
                 items(payments, key = { payment -> payment.id }) { payment ->
                     PayCard(payment)
-
                 }
             }
 
@@ -162,9 +131,10 @@ fun PaymentsBodyUI(modifier: Modifier, login: Login, payments: List<Payments>) {
 }
 
 @Composable
-fun PayCard(payments: Payments) {
+fun PayCard( payments: Payments) {
     Row(horizontalArrangement = Arrangement.spacedBy(80.dp)) {
         Column() {
+            Spacer(Modifier.height(20.dp))
             Text(
                 "Conta de luz",
                 Modifier.paddingFromBaseline(top = 50.dp),
@@ -193,4 +163,52 @@ fun PayCard(payments: Payments) {
     }
 
 
+}
+
+
+
+
+@Composable
+fun payHeader(login: Login) {
+    Row(horizontalArrangement = Arrangement.spacedBy(80.dp)) {
+        Column() {
+            Spacer(Modifier.height(20.dp))
+            Text(
+                "Detalhes do pagamento",
+                Modifier.paddingFromBaseline(top = 50.dp),
+                fontSize = 28.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+            )
+            Spacer(Modifier.height(50.dp))
+            Text(
+                "Nome: ${login.customerName}",
+                fontSize = 24.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+            )
+            Spacer(Modifier.height(10.dp))
+            Row {
+                Text(
+                    "Agência: ${login.branchNumber} | Conta: ${login.accountNumber}",
+                    fontSize = 16.sp,
+                    color = Color(0xFF4A739C),
+                )
+            }
+            Spacer(Modifier.height(30.dp))
+            Text(
+                "Saldo: R$ 1500,00",
+                fontSize = 24.sp,
+                color = Color.Black,
+            )
+            Text(
+                "Contas pagas",
+                Modifier.paddingFromBaseline(top = 50.dp),
+                fontSize = 28.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+            )
+
+        }
+    }
 }

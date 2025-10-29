@@ -11,10 +11,10 @@
 -   Material Design 3 (ou Theme padrão)
 -   Layout responsivo
 -   README curto explicando como rodar o projeto
-- 
+
 ## Como Usar
-Conecte seu celular com USB ou com WiFI ou rode o Emulator!!!
+Conecte seu celular com USB ou com WiFi ou rode o Emulator!!!
 
 ## Imagens
-![1age.jpg](../../Desktop/1age.jpg)
-![2age.jpg](../../Desktop/2age.jpg)
+![1age.jpg](image/1age.jpg)!
+![2age.jpg](image/2age.jpg)!

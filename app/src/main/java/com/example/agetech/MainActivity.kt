@@ -16,16 +16,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.agetech.components.LoadingScreen
 import com.example.agetech.model.Login
 import com.example.agetech.navigation.AgeTechNavigation
-
-
 import com.example.agetech.ui.theme.AgeTechTheme
 import com.example.agetech.view.LoginUI
 import com.example.agetech.view.PaymentsBodyUI
-
-
 import com.example.agetech.view.PaymentsUI
-import com.example.agetech.view.PaymentsUiState
-import com.example.agetech.view.PaymentsViewModel
 import com.example.agetech.view.previewPayments
 import dagger.hilt.android.AndroidEntryPoint
 

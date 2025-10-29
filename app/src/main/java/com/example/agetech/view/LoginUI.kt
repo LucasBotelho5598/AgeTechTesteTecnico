@@ -1,9 +1,12 @@
 package com.example.agetech.view
 
+import ButtonLogin
 import android.os.Build
 import androidx.annotation.RequiresExtension
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,12 +20,17 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,9 +38,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.agetech.viewmodel.LoginViewModel
 
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -126,10 +137,19 @@ fun BodyUI(
 
             )
             Spacer(Modifier.height(20.dp))
+            //password
+            var showPassword by remember { mutableStateOf(false) }
             TextField(
                 value = password,
                 onValueChange =updateStatePassword,
-                modifier = Modifier
+                /*visualTransformation = if(showPassword) VisualTransformation.None else PasswordVisualTransformation(),
+                leadingIcon = {
+                    IconButton(onClick = { showPassword = !showPassword })
+                    {
+
+                    }
+                },*/
+                        modifier = Modifier
                     .width(450.dp)
                     .height(56.dp),
                 shape = RoundedCornerShape(12.dp),
@@ -155,30 +175,59 @@ fun BodyUI(
 
             )
             Spacer(Modifier.height(20.dp))
-            Button(
-                onClick = {
-                    if(email == "age@gmail.com" && password =="123456"){
-                        onLogin()
-                    }
-                },
-                Modifier
-                    .width(450.dp)
-                    .height(60.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonColors(
-                    contentColor = Color(0xFF358073),
-                    containerColor = Color(0xFF358073),
-                    disabledContainerColor = Color(0xFF358073),
-                    disabledContentColor = Color(0xFF358073),
-                ),
-            ) {
-                Text(
-                    "Login",
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    fontSize = 16.sp
-                )
 
+            val mutableInteractionSource = remember {
+                MutableInteractionSource()
+            }
+            val pressed = mutableInteractionSource.collectIsPressedAsState()
+            if(email == "age@gmail.com" && password =="123456") {
+                Button(
+                    onClick = {
+                        onLogin()
+                    },
+                    Modifier
+                        .width(450.dp)
+                        .height(60.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonColors(
+                        contentColor = Color(0xFF358073),
+                        containerColor = Color(0xFF358073),
+                        disabledContainerColor = Color(0xFF358073),
+                        disabledContentColor = Color(0xFF358073),
+                    ),
+                ) {
+                    Text(
+                        "Login",
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        fontSize = 16.sp
+                    )
+
+                }
+            }else{
+                Button(
+                    onClick = {
+
+                    },
+                    Modifier
+                        .width(450.dp)
+                        .height(60.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonColors(
+                        contentColor = Color(0xFF000000),
+                        containerColor = Color(0xFF000000),
+                        disabledContainerColor = Color(0xFF000000),
+                        disabledContentColor = Color(0xFF000000),
+                    ),
+                ) {
+                    Text(
+                        "Login",
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        fontSize = 16.sp
+                    )
+
+                }
             }
 
         }

@@ -14,4 +14,6 @@ class BankRepository @Inject constructor(
      suspend fun getLogin(): List<Login> = bankServices.getLogin()
      suspend fun getPayments(): List<Payments> = bankServices.getPayments()
 
+
+
 }

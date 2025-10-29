@@ -1,4 +1,4 @@
-package com.example.agetech.view
+package com.example.agetech.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

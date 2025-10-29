@@ -1,4 +1,4 @@
-package com.example.agetech.view
+package com.example.agetech.viewmodel
 
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
